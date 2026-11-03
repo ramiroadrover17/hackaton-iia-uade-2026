@@ -275,4 +275,4 @@ sensibilidad produce listados más largos y, si se usa mal, más daño.
 
 | Corrida | Nota | Agujero que encontró | Qué cambiamos |
 |---------|------|----------------------|---------------|
-| 1 | 9/10 | La sección 3 afirmaba que la prueba nunca se miró, mientras la bitácora #4 contaba que un umbral candidato se había ajustado al caso 19. También nos preguntó qué tiene que ver marcar estudiantes con retenerlos. | Reescribimos la justificación del umbral en la sección 3: mostramos que todo el rango 71-88% da la misma matriz de entrenamiento y admitimos que la prueba dejó de ser ciega. Agregamos a la sección 1 la distinción entre marcar y retener. |
+| 1 | 9/10 | La sección 3 afirmaba que la prueba nunca se miró, mientras la bitácora #4 contaba que un umbral candidato se había ajustado al caso 19. También preguntó qué tiene que ver marcar estudiantes con retenerlos. | Reescribimos la justificación del umbral en la sección 3: mostramos que todo el rango 71-88% da la misma matriz de entrenamiento y admitimos que la prueba dejó de ser ciega. Agregamos a la sección 1 la distinción entre marcar y retener. |

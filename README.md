@@ -1,4 +1,6 @@
-# M10 · ¿Este estudiante abandona primer año?
+# M10 · Predeccion de abando estudiantial
+
+> **Hackatón IIA · UADE · 3.4.257.** Este README es la plantilla del grupo. En su fork, reemplacen todo lo que está entre `< >` y borren esta nota. Las bases están en `BASES.md` y su ficha en `problematicas/`.
 
 **Integrantes:** Ramiro Adrover - Gonzalez Gori Bruno
 **IA declarada:** Claude
@@ -16,12 +18,18 @@ cierre del primer cuatrimestre
 
 | PEAS | Su sistema |
 |---|---|
-| Medida de rendimiento | <cómo se sabe si decidió bien> |
-| Entorno | <dónde y con qué decide> |
-| Actuadores | <qué hace con la decisión> |
-| Sensores | <qué datos recibe> |
+| Medida de rendimiento | Cuántos de los ingresantes que efectivamente abandonan fueron detectados a tiempo, sin inflar tanto las alertas que el programa de tutorías quede sin cupos útiles.|
+| Entorno | La secretaría académica de una universidad, al cierre del primer cuatrimestre, con el legajo administrativo y académico de cada ingresante. |
+| Actuadores | Marcar al estudiante en el listado de alerta temprana y asignarle un cupo de tutoría de acompañamiento. |
+| Sensores | Tres datos del legajo al cierre del cuatrimestre: asistencia (% del cuatrimestre), materias aprobadas (de 5) y horas de trabajo por semana. |
 
-**Objetivo y métrica.** <Qué es lo que de verdad importa en su problema y con qué métrica lo van a medir. ¿Son lo mismo?>
+**Objetivo y métrica.** No son lo mismo, y confundirlos es el error
+central de este problema. El objetivo es retener estudiantes: que
+ningún ingresante en riesgo se quede sin tutoría. La metrica es la
+sensibilidad (de los que abandonan, cuántos detectamos), porque el
+falso negativo cuesta un año de vida de una persona y el falso positivo
+cuesta un cupo de tutoría.
+
 
 ## 2. El sistema
 

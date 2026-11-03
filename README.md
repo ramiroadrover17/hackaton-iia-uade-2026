@@ -4,7 +4,7 @@
 **Integrantes:** Ramiro Adrover - Gonzalez Gori Bruno
 **IA declarada:** Claude
 **Pista:** Reglas
-**Publicación en LinkedIn:** <link>
+**Publicación en LinkedIn:** Link Bruno (https://www.linkedin.com/feed/update/urn:li:share:7523368892740780033?openCollaboratorList=false)
 
 ---
 

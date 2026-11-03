@@ -106,9 +106,46 @@ Lo que sí se sostiene en los dos conjuntos es la sensibilidad del 100%:
 ningún estudiante que abandonó quedó sin detectar, ni entre los 14 ni
 entre los 6. Es exactamente lo que el objetivo pide.
 
+
 ## 4. El error más caro
 
-<¿Es peor el falso positivo o el falso negativo en su problema? ¿Por qué, según la ficha? ¿Qué cambiaron en el sistema para cometer menos ese error?>
+El error más caro es el **falso negativo**: decir NO sobre un
+estudiante que sí abandona. Ya lo anticipamos en la sección 1, al
+separar el objetivo de la métrica, y es la razón por la que elegimos
+la sensibilidad.
+
+**Por qué, según la ficha.** La ficha describe los dos errores y no son
+intercambiables. El falso positivo gasta un cupo de tutoría en alguien
+que iba a seguir: cuesta un recurso y se recupera. El falso negativo
+significa que la universidad pierde al estudiante y él pierde el año:
+no hay forma de recuperarlo después, porque cuando se nota ya no está.
+El sistema existe para ofrecer tutorías, así que equivocarse ofreciendo
+una de más es parte del costo de operarlo; equivocarse no ofreciéndola
+es el fracaso del sistema entero.
+
+**Qué cambiamos en el sistema.** El umbral de asistencia. La primera
+versión de R1 usaba asistencia < 60%, que es el corte que separa más
+limpiamente a los dos grupos en el entrenamiento:
+
+| Umbral de asistencia | VP | FN | FP | VN | Sensibilidad | Exactitud |
+|---|---|---|---|---|---|---|
+| < 60% | 5 | 2 | 0 | 7 | 71,4% | 85,7% |
+| < 75% (elegido) | 7 | 0 | 1 | 6 | 100% | 92,9% |
+
+Con 60% el sistema no comete ningún falso positivo, pero se le escapan
+los casos 3 y 11: dos estudiantes con 70% de asistencia que abandonan.
+Son exactamente el error que no podemos permitirnos. Al subir el umbral
+a 75% esos dos casos se detectan y aparece un solo falso positivo, el
+caso 12.
+
+Es un intercambio deliberado: **cambiamos dos falsos negativos por un
+falso positivo**. En términos del problema, cambiamos dos estudiantes
+perdidos por un cupo de tutoría usado de más.
+
+La segunda condición de R1 (materias aprobadas <= 3) es la que impide
+que ensanchar el umbral llene el sistema de alertas: sostiene en NO a
+quien falta pero aprueba, como el caso 9 (63% de asistencia y 5
+materias) y el caso 18 en prueba (37% de asistencia y 4 materias).
 
 ## 5. ¿Comparado contra qué?
 
@@ -144,7 +181,48 @@ valor agregado real: la misma detección con una fracción de los cupos.
 
 ## 6. Riesgo: el camino completo
 
-<Datos → modelo → decisión → consecuencia aplicado a su caso. Al menos un riesgo concreto.>
+**Datos → modelo → decisión → consecuencia**
+
+- **Datos.** 20 casos inventados, de una sola institución implícita.
+  Las variables que usamos (asistencia y materias aprobadas) no son
+  causas del abandono: son síntomas de situaciones que el dato no
+  registra, como la situación económica, el cuidado de familiares o una
+  elección de carrera equivocada. El sistema ve la sombra, no el hecho.
+- **Modelo.** Dos reglas con umbrales fijos, elegidos por nosotros
+  sobre 14 casos. El 75% de asistencia es un criterio razonable, pero
+  es nuestro: ninguna institución lo validó.
+- **Decisión.** La secretaría académica marca al estudiante en un
+  listado de alerta temprana y le asigna un cupo de tutoría.
+- **Consecuencia.** Una persona queda etiquetada como "probable
+  abandono" en un registro institucional.
+
+**El riesgo concreto: la etiqueta se vuelve profecía.**
+
+El sistema produce un listado de nombres. Mientras ese listado lo use
+solo quien ofrece la tutoría, el peor caso es un cupo gastado de más.
+Pero un listado circula: llega al docente, al tutor, queda asentado en
+el legajo. Y un estudiante tratado como probable abandono recibe menos
+expectativa de quienes lo acompañan, lo que empuja justo hacia el
+resultado que el sistema predijo.
+
+El problema no es solo el daño: es que el error se vuelve invisible. Si
+el estudiante termina abandonando, el sistema queda registrado como
+acertado, aunque haya contribuido a ese desenlace. Ningún número de la
+sección 3 puede detectar eso, porque la matriz de confusión compara la
+predicción contra un resultado que la predicción ya influyó.
+
+**Dos condiciones de uso que se desprenden de esto.**
+
+1. La única acción autorizada sobre la salida del sistema es **ofrecer
+   apoyo**. Con los mismos números, una gestión podría hacer lo
+   contrario: no renovar una beca, desaconsejar la reinscripción,
+   concentrar recursos en quienes "van a seguir". La salida es idéntica
+   y la consecuencia es opuesta.
+2. El listado no sale del circuito de tutorías ni se asienta en el
+   legajo. Un SÍ es una invitación a una tutoría, no un antecedente.
+
+Nada de esto se arregla mejorando el modelo. Un sistema con mejor
+sensibilidad produce listados más largos y, si se usa mal, más daño.
 
 ## 7. Bitácora
 

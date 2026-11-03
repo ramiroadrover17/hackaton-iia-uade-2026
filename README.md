@@ -51,18 +51,19 @@ precisión y especificidad, y la comparamos contra la línea base trivial
 
 ## 2. El sistema
 
-**Cómo decide.** <Neurona: pesos y sesgo. Reglas: la lista de reglas si‑entonces. Agente: la regla con la que elige la acción.>
+**Cómo decide.** R1: si la asistencia es menor a 75 y aprobó 3 materias o menos, SÍ.(Abandona)
+                 R2: en cualquier otro caso, NO.(Se Queda)
 
-**Variables que usa y por qué.** <Cuáles usa, cuáles descarta y por qué.>
+**Variables que usa y por qué.** Usa asistencia y materias aprobadas. Descarta horas de trabajo porque en entrenamiento aparecen valores altos y bajos en los dos grupos por lo que no separa realmente. Descarta la constancia de baja porque es fuga de información: quien ya la pidió está abandonando, el dato no está disponible a tiempo para una alerta temprana.
 
-**Cómo se corre en vivo.** <Pasos concretos para resolver un caso nuevo: link al Colab, a la planilla o la cuenta a mano.>
+**Cómo se corre en vivo.** Mirar la asistencia del caso. Si es 75 o más, NO. Si es menor a 75, mirar las materias aprobadas, si tiene 3 o menos, SI. Y en caso contrario, NO.
 
 **Dos casos de ejemplo.**
 
 | Caso inventado | Valores | Salida del sistema |
 |---|---|---|
-| A | <…> | <SÍ/NO> |
-| B | <…> | <SÍ/NO> |
+| A | asistencia 65, materias 2, horas 30 | SÍ |
+| B | asistencia 60, materias 5, horas 10| NO |
 
 ## 3. Medición
 

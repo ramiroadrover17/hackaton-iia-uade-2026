@@ -1,5 +1,6 @@
-# M10 · ¿Este estudiante abandona primer año?
+# M10 · Predeccion de abando estudiantial
 
+> **Hackatón IIA · UADE · 3.4.257.** Este README es la plantilla del grupo. En su fork, reemplacen todo lo que está entre `< >` y borren esta nota. Las bases están en `BASES.md` y su ficha en `problematicas/`.
 
 **Integrantes:** Ramiro Adrover - Gonzalez Gori Bruno
 **IA declarada:** Claude
@@ -70,24 +71,41 @@ precisión y especificidad, y la comparamos contra la línea base trivial
 
 | | Predice SÍ | Predice NO |
 |---|---|---|
-| **Real SÍ** | VP = <> | FN = <> |
-| **Real NO** | FP = <> | VN = <> |
+| **Real SÍ** | VP = 7 | FN = 0 |
+| **Real NO** | FP = 1 | VN = 6 |
 
 **Prueba (casos 15–20)**
 
 | | Predice SÍ | Predice NO |
 |---|---|---|
-| **Real SÍ** | VP = <> | FN = <> |
-| **Real NO** | FP = <> | VN = <> |
+| **Real SÍ** | VP = 2 | FN = 0 |
+| **Real NO** | FP = 0 | VN = 4 |
 
 | Métrica | Entrenamiento | Prueba |
 |---|---|---|
-| Exactitud | <> | <> |
-| Precisión | <> | <> |
-| Sensibilidad | <> | <> |
-| Especificidad | <> | <> |
+| Exactitud | 13/14 = 92.9% | 6/6 = 100% |
+| Precisión | 7/8 = 87.5% | 2/2 = 100% |
+| Sensibilidad | 7/7 = 100%  | 2/2 = 100% |
+| Especificidad | 6/7 = 85.7% | 4/4 = 100% |
 
-**Entrenamiento contra prueba.** <¿Hay diferencia? ¿Por qué? ¿Sobreajuste o generalización?>
+**Entrenamiento contra prueba.** La prueba da mejor que el
+entrenamiento, que es lo contrario de lo que se esperaría si hubiera
+sobreajuste: un sistema sobreajustado memoriza el entrenamiento y se
+cae en la prueba. Acá no pasa, y hay dos razones.
+
+Primero, el sistema tiene solo dos umbrales y ninguno se eligió mirando
+los casos 15 a 20, así que no hay nada memorizado para que se caiga.
+
+Segundo, y más importante: **el 100% de la prueba no significa que el
+sistema sea perfecto**. Son 6 casos, así que cada caso vale 16,7 puntos
+porcentuales; con un solo caso distinto la exactitud bajaría a 83,3%.
+La conclusión honesta es que el sistema generaliza — el comportamiento
+en prueba es consistente con el de entrenamiento — pero la muestra de
+prueba es demasiado chica para afirmar más que eso.
+
+Lo que sí se sostiene en los dos conjuntos es la sensibilidad del 100%:
+ningún estudiante que abandonó quedó sin detectar, ni entre los 14 ni
+entre los 6. Es exactamente lo que el objetivo pide.
 
 ## 4. El error más caro
 

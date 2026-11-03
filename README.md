@@ -11,7 +11,10 @@
 
 ## 1. Formulación y PEAS
 
-**La pregunta.** <Para cada caso, ¿…? SÍ significa: …>
+**La pregunta.** Para cada caso, ¿este estudiante abandona antes de
+terminar primer año? SÍ significa: el estudiante deja la carrera antes
+de completar el primer año. Cada caso es un ingresante evaluado al
+cierre del primer cuatrimestre
 
 | PEAS | Su sistema |
 |---|---|

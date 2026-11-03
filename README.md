@@ -13,21 +13,19 @@
 **La pregunta.** Para cada caso, ¿este estudiante abandona antes de
 terminar primer año? SÍ significa: el estudiante deja la carrera antes
 de completar el primer año. Cada caso es un ingresante evaluado al
-cierre del primer cuatrimestre
+cierre del primer cuatrimestre.
 
 | PEAS | Su sistema |
 |---|---|
-| Medida de rendimiento | Cuántos de los ingresantes que efectivamente abandonan fueron detectados a tiempo, sin inflar tanto las alertas que el programa de tutorías quede sin cupos útiles.|
+| Medida de rendimiento | Cuántos de los ingresantes que efectivamente abandonan fueron detectados a tiempo, sin inflar tanto las alertas que el programa de tutorías quede sin cupos útiles. |
 | Entorno | La secretaría académica de una universidad, al cierre del primer cuatrimestre, con el legajo administrativo y académico de cada ingresante. |
 | Actuadores | Marcar al estudiante en el listado de alerta temprana y asignarle un cupo de tutoría de acompañamiento. |
-| Sensores | Dos datos del legajo al cierre del cuatrimestre: asistencia (% del cuatrimestre) y materias aprobadas (de 5). La ficha ofrece dos variables más (horas de trabajo y constancia de baja) que el sistema no usa; el porqué está en la sección 2. |
+| Sensores | Dos datos del legajo al cierre del cuatrimestre: asistencia (% del cuatrimestre) y materias aprobadas (de 5). La ficha ofrece dos variables más, horas de trabajo y constancia de baja, que el sistema no usa; el porqué está en la sección 2. |
 
 **Objetivo y métrica.** No son lo mismo, y confundirlos es el error
 central de este problema. El objetivo es retener estudiantes: que
-ningún ingresante en riesgo se quede sin tutoría. La metrica es la
-sensibilidad (de los que abandonan, cuántos detectamos), porque el
-falso negativo cuesta un año de vida de una persona y el falso positivo
-cuesta un cupo de tutoría. 
+ningún ingresante en riesgo se quede sin tutoría. La métrica es la
+sensibilidad (de los que abandonan, cuántos detectamos).
 
 Elegimos esa métrica por el costo asimétrico de los errores. Los dos
 errores no valen lo mismo:
@@ -47,6 +45,15 @@ sensibilidad sola se maximiza diciendo SÍ a todos, lo cual no retiene a
 nadie y vacía el programa de tutorías. Por eso la reportamos junto a
 precisión y especificidad, y la comparamos contra la línea base trivial
 (sección 5).
+
+**El sistema marca, no retiene.** La salida es una alerta y el objetivo
+es la retención; entre una cosa y la otra está la tutoría, que es la
+que efectivamente puede retener al estudiante y cuya eficacia no
+medimos ni podemos medir con los datos de la ficha. El sistema
+contribuye al objetivo solo si existe un programa de tutorías con cupos
+reales y si ese programa funciona. Sin eso, una alerta bien calculada
+no retiene a nadie. La sensibilidad mide el techo de lo que el sistema
+puede aportar, no el resultado.
 
 
 ## 2. El sistema

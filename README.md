@@ -1,6 +1,4 @@
-# M10 · Predeccion de abando estudiantial
-
-> **Hackatón IIA · UADE · 3.4.257.** Este README es la plantilla del grupo. En su fork, reemplacen todo lo que está entre `< >` y borren esta nota. Las bases están en `BASES.md` y su ficha en `problematicas/`.
+# M10 · ¿Este estudiante abandona primer año?
 
 **Integrantes:** Ramiro Adrover - Gonzalez Gori Bruno
 **IA declarada:** Claude

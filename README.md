@@ -28,7 +28,26 @@ central de este problema. El objetivo es retener estudiantes: que
 ningún ingresante en riesgo se quede sin tutoría. La metrica es la
 sensibilidad (de los que abandonan, cuántos detectamos), porque el
 falso negativo cuesta un año de vida de una persona y el falso positivo
-cuesta un cupo de tutoría.
+cuesta un cupo de tutoría. 
+
+Elegimos esa métrica por el costo asimétrico de los errores. Los dos
+errores no valen lo mismo:
+
+- **Falso positivo:** le ofrecemos tutoría a alguien que iba a seguir.
+  Cuesta un cupo de tutoría, y es recuperable.
+- **Falso negativo:** no detectamos a quien abandona. La universidad
+  pierde al estudiante y él pierde el año. No es recuperable.
+
+Como el falso negativo es el error caro, el sistema está calibrado para
+equivocarse del lado barato: preferimos alertar de más antes que dejar
+pasar a un estudiante en riesgo. Eso se mide con sensibilidad, no con
+exactitud: un sistema puede tener exactitud alta y sensibilidad cero.
+
+La métrica sigue siendo un proxy imperfecto del objetivo: la
+sensibilidad sola se maximiza diciendo SÍ a todos, lo cual no retiene a
+nadie y vacía el programa de tutorías. Por eso la reportamos junto a
+precisión y especificidad, y la comparamos contra la línea base trivial
+(sección 5).
 
 
 ## 2. El sistema

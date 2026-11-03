@@ -76,6 +76,10 @@ precisión y especificidad, y la comparamos contra la línea base trivial
 | **Real SÍ** | VP = 7 | FN = 0 |
 | **Real NO** | FP = 1 | VN = 6 |
 
+Total: 7 + 0 + 1 + 6 = 14 casos. El único error es el caso 12
+(asistencia 68%, 3 materias aprobadas): el sistema dice SÍ y el
+estudiante no abandonó.
+
 **Prueba (casos 15–20)**
 
 | | Predice SÍ | Predice NO |
@@ -83,30 +87,48 @@ precisión y especificidad, y la comparamos contra la línea base trivial
 | **Real SÍ** | VP = 2 | FN = 0 |
 | **Real NO** | FP = 0 | VN = 4 |
 
+Total: 2 + 0 + 0 + 4 = 6 casos. Sin errores.
+
 | Métrica | Entrenamiento | Prueba |
 |---|---|---|
-| Exactitud | 13/14 = 92.9% | 6/6 = 100% |
-| Precisión | 7/8 = 87.5% | 2/2 = 100% |
-| Sensibilidad | 7/7 = 100%  | 2/2 = 100% |
-| Especificidad | 6/7 = 85.7% | 4/4 = 100% |
+| Exactitud | 13/14 = 92,9% | 6/6 = 100% |
+| Precisión | 7/8 = 87,5% | 2/2 = 100% |
+| Sensibilidad | 7/7 = 100% | 2/2 = 100% |
+| Especificidad | 6/7 = 85,7% | 4/4 = 100% |
 
 **Entrenamiento contra prueba.** La prueba da mejor que el
 entrenamiento, que es lo contrario de lo que se esperaría si hubiera
 sobreajuste: un sistema sobreajustado memoriza el entrenamiento y se
-cae en la prueba. Acá no pasa, y hay dos razones.
+cae en la prueba. Acá no pasa, pero el resultado necesita tres
+aclaraciones.
 
-Primero, el sistema tiene solo dos umbrales y ninguno se eligió mirando
-los casos 15 a 20, así que no hay nada memorizado para que se caiga.
+**Los umbrales no están sintonizados sobre la prueba.** Con la segunda
+condición fija (materias aprobadas <= 3), cualquier umbral de
+asistencia entre 71% y 88% produce exactamente la misma matriz de
+entrenamiento: los casos que abandonan llegan hasta 70% de asistencia y
+el siguiente caso que no abandona está en 88%. El entrenamiento por sí
+solo no permite distinguir entre esos umbrales, así que el 75% se
+eligió por criterio de dominio y no por su efecto sobre los casos 15
+a 20.
 
-Segundo, y más importante: **el 100% de la prueba no significa que el
-sistema sea perfecto**. Son 6 casos, así que cada caso vale 16,7 puntos
-porcentuales; con un solo caso distinto la exactitud bajaría a 83,3%.
-La conclusión honesta es que el sistema generaliza: el comportamiento en prueba es consistente con el de entrenamiento, pero la muestra de prueba es demasiado chica para afirmar más que eso.
+**Aun así, la prueba no es del todo ciega.** La bitácora #4 lo deja
+ver: durante el desarrollo apareció un umbral candidato que estaba
+ajustado al caso 19, que es de prueba. Desde ese momento dejamos de
+poder llamarla ciega. Lo que sostenemos es que el umbral que quedó
+tiene una justificación independiente de esos seis casos. Lo que no
+sostenemos es que el 100% de prueba sea una estimación limpia de
+rendimiento futuro.
+
+**El 100% de la prueba no significa que el sistema sea perfecto.** Son
+6 casos, así que cada caso vale 16,7 puntos porcentuales; con un solo
+caso distinto la exactitud bajaría a 83,3%. El sistema generaliza, en
+el sentido de que su comportamiento en prueba es consistente con el de
+entrenamiento, pero la muestra es demasiado chica para afirmar más
+que eso.
 
 Lo que sí se sostiene en los dos conjuntos es la sensibilidad del 100%:
 ningún estudiante que abandonó quedó sin detectar, ni entre los 14 ni
 entre los 6. Es exactamente lo que el objetivo pide.
-
 
 ## 4. El error más caro
 
@@ -246,4 +268,4 @@ sensibilidad produce listados más largos y, si se usa mal, más daño.
 
 | Corrida | Nota | Agujero que encontró | Qué cambiamos |
 |---------|------|----------------------|---------------|
-| 1 | <> | <> | <> |
+| 1 | 9/10 | La sección 3 afirmaba que la prueba nunca se miró, mientras la bitácora #4 contaba que un umbral candidato se había ajustado al caso 19. También nos preguntó qué tiene que ver marcar estudiantes con retenerlos. | Reescribimos la justificación del umbral en la sección 3: mostramos que todo el rango 71-88% da la misma matriz de entrenamiento y admitimos que la prueba dejó de ser ciega. Agregamos a la sección 1 la distinción entre marcar y retener. |
